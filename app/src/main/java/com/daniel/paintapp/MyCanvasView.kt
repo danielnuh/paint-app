@@ -3,6 +3,7 @@ package com.daniel.paintapp
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.PorterDuff
@@ -157,32 +158,27 @@ class MyCanvasView(context: Context, attrs: AttributeSet) : View(context, attrs)
         val squareBitmapWidth = (startRight-startLeft)+threshold
         val squareBitmapHeight = (startBottom-startTop)+threshold
 
-        // Initialize a new instance of Bitmap
-        // Initialize a new instance of Bitmap
         val dstBitmap = Bitmap.createBitmap(
             squareBitmapWidth,  // Width
             squareBitmapHeight,  // Height
             Bitmap.Config.ARGB_8888 // Config
         )
+
         val canvas = Canvas(dstBitmap)
-        // Initialize a new Paint instance
-        // Initialize a new Paint instance
+
         val paint = Paint()
         paint.isAntiAlias = true
+
         val rect = Rect(0, 0, squareBitmapWidth, squareBitmapHeight)
         val rectF = RectF(rect)
         canvas.drawRect(rectF, paint)
+
         paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
-        // Calculate the left and top of copied bitmap
-        // Calculate the left and top of copied bitmap
         val left:Float = -(startLeft)+(threshold/2).toFloat()
         val top:Float = -(startTop)+(threshold/2).toFloat()
+
+        canvas.drawColor(Color.WHITE)
         canvas.drawBitmap(srcBitmap, left, top, paint)
-        // Free the native object associated with this bitmap.
-        // Free the native object associated with this bitmap.
-//        srcBitmap.recycle()
-        // Return the circular bitmap
-        // Return the circular bitmap
         return dstBitmap
     }
 
