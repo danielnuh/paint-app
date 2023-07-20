@@ -11,7 +11,6 @@ import android.graphics.PorterDuffXfermode
 import android.graphics.Rect
 import android.graphics.RectF
 import android.util.AttributeSet
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
@@ -144,6 +143,8 @@ class MyCanvasView(context: Context, attrs: AttributeSet) : View(context, attrs)
     fun clearCanvas(){
         isPaint = false
         extraCanvas.drawColor(backgroundColor)
+        extraCanvas.drawPath(path, paint)
+        invalidate()
     }
 
     fun cropImage():Bitmap{
